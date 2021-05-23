@@ -27,11 +27,20 @@ export default function Register(){
         const requestRegister = axios.post(url, body);
         requestRegister.then((request)=>{
             setLoading(false);
+            setEmail("");
+            setPassword("");
+            setName("");
+            setImage("");
+            setLoading("");
             history.push("/");
-            console.log(request)
         });
         requestRegister.catch(()=>{
             setLoading(false);
+            setEmail("");
+            setPassword("");
+            setName("");
+            setImage("");
+            setLoading("");
             alert("Ops, não conseguimos te cadastrar. Tente novamente");
         })
     }

@@ -7,6 +7,7 @@ import Loader from 'react-loader-spinner';
 import UserContext from '../contexts/UserContext';
 
 export default function Login(){
+    const history = useHistory();
 
     const {loggedUser, setLoggedUser} = useContext(UserContext);
 
@@ -15,8 +16,7 @@ export default function Login(){
     const [loading, setLoading] = useState(false);
 
     if(loggedUser.id){
-        console.log("Alguém logou");
-        console.log(loggedUser);
+        history.push("/hoje");
         return "";
     }
 
