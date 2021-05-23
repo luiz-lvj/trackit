@@ -48,6 +48,6 @@ const ContainerProgress = styled.div`
     height: 91px;
     width: 91px;
     position: fixed;
-    bottom: 24.5px;
+    bottom: 19px;
     right: calc(50% - 45.5px);
 `;

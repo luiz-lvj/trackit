@@ -27,11 +27,10 @@ export default function TodayHabits(){
         requestPromise.then((request)=>{
             setHabits(request.data);
             console.log(request);
-            alert('foi');
             setHabitsAvailable(true);
         })
         requestPromise.catch(()=>{
-            alert('não foi');
+            alert("Não conseguimos acessar seus hábitos de hoje.")
             setHabitsAvailable(true);
         })
     },[]);

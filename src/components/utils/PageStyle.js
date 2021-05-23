@@ -4,7 +4,6 @@ const PageStyle = styled.div`
     display: flex;
     flex-direction: column;
     background: #F2F2F2;
-    height: 100vh;
     margin-top: 70px;
     margin-bottom: 70px;
     padding-left: 17px;

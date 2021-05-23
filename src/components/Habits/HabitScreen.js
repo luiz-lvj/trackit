@@ -7,6 +7,7 @@ import { useContext, useState } from 'react';
 import UserContext from '../contexts/UserContext';
 import { IoAdd } from "react-icons/io5";
 import CreateHabit from './CreateHabit';
+import UserHabits from './UserHabits';
 
 export default function HabitScreen(){
     const history = useHistory();
@@ -26,6 +27,7 @@ export default function HabitScreen(){
                 <div onClick={()=>setInCreation(true)}><IoAdd color={'#FFFFFF'} size={'27px'}/></div>
             </PageTop>
             {inCreation ? <CreateHabit setInCreation={setInCreation}/> : ""}
+            <UserHabits/>
             <Footer/>
         </PageStyle>
     );
