@@ -10,7 +10,7 @@ export default function UserHabits(){
     const [habits, setHabits] = useState([]);
     const { loggedUser, setLoggeduSer } = useContext(UserContext);
 
-    useEffect(()=>{
+    function loadHabits(){
         const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
         const config = {
             headers: {
@@ -21,6 +21,10 @@ export default function UserHabits(){
         requestPromise.then((request)=>{
             setHabits(request.data)
         })
+    }
+
+    useEffect(()=>{
+        loadHabits();
     }, [])
 
     if(habits.length === 0){
@@ -31,11 +35,32 @@ export default function UserHabits(){
         );
     }
 
+    function deleteHabit(id){
+        const confimation = window.confirm("Você tem certeza que deseja deletar esse hábito?");
+        if(!confimation){
+            return;
+        }
+        const url = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`;
+        const config = {
+            headers: {
+                "Authorization": `Bearer ${loggedUser.token}`
+            }
+        }
+        const requestPromise = axios.delete(url, config);
+        requestPromise.then(()=>{
+            alert('Seu hábito foi excluído com sucesso!');
+            loadHabits();
+        });
+        requestPromise.catch(()=>{
+            alert('Não conseguimos excluir seu hábito!');
+        });
+    }
+
     return(
         <UserHabitStyles>
             {habits.map((habit)=>{
                 return(
-                    <li key={habit.ids}>
+                    <li key={habit.id}>
                         <HabitInfo>
                             <p>{habit.name}</p>
                             <Days>
@@ -55,10 +80,8 @@ export default function UserHabits(){
                                 })}
                             </Days>
                         </HabitInfo>
-                        <Delete><IoTrashOutline/></Delete>
-
+                        <Delete><IoTrashOutline onClick={()=>deleteHabit(habit.id)}/></Delete>
                     </li>
-                    
                 );
             })}
             
@@ -85,7 +108,6 @@ const UserHabitStyles = styled.ul`
 const Delete = styled.li`
     display: flex;
     justify-content: right;
-    cursor: pointer;
 `;
 
 const HabitInfo = styled.div`

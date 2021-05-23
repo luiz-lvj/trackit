@@ -7,6 +7,8 @@ export const LoginScreen = styled.div`
     padding-right: 36px;
     padding-left: 36px;
     padding-top: 68px;
+    background: #FFFFFF;
+    height: 100vh;
     img{
         width: 180px;
         height: 178px;

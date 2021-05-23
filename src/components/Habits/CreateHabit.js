@@ -80,7 +80,7 @@ export default function CreateHabit(props){
                 })}
             </Days>
             <CreationActions>
-                <p onClick={endCreation}>Cancelar</p>
+                <p onClick={()=>props.setInCreation(false)}>Cancelar</p>
                 <button onClick={createHabit} disabled={loading}>
                     {loading ?
                     <Loader type="ThreeDots" color="#FFFFFF" height={13} width={80} />
