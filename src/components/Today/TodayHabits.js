@@ -41,13 +41,14 @@ export default function TodayHabits(){
             return;
         }
         setDisableSelection(true);
-        const url = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`;
+        const url = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`;
         const config = {
             headers: {
                 "Authorization": `Bearer ${loggedUser.token}`
             }
         }
-        const requestPromise = axios.post(url, config);
+        const body = {}
+        const requestPromise = axios.post(url,body, config);
         requestPromise.then(()=>{
             const tmpHabits = [...habits]
             tmpHabits.forEach((habit)=>{
@@ -75,7 +76,8 @@ export default function TodayHabits(){
                 "Authorization": `Bearer ${loggedUser.token}`
             }
         }
-        const requestPromise = axios.post(url, config);
+        const body = {}
+        const requestPromise = axios.post(url,body, config);
         requestPromise.then(()=>{
             const tmpHabits = [...habits]
             tmpHabits.forEach((habit)=>{
@@ -86,9 +88,10 @@ export default function TodayHabits(){
             setHabits(tmpHabits);
             setDisableSelection(false);
         });
-        requestPromise.catch(()=>{
+        requestPromise.catch((request)=>{
             alert('Não foi possível desmarcar seu hábito como feito');
             setDisableSelection(false);
+            console.log(request)
         });
     }
 
@@ -162,6 +165,7 @@ const HabitsStyles = styled.ul`
         padding: 14px;
         display: flex;
         justify-content: space-between;
+        margin-bottom: 10px;
     }
 `;
 

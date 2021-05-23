@@ -5,6 +5,7 @@ import Login from './Login/Login';
 import Register from './Login/Register';
 import UserContext from './contexts/UserContext';
 import TodayScreen from './Today/TodayScreen';
+import HabitScreen from './Habits/HabitScreen';
 
 export default function App(){
     const [loggedUser, setLoggedUser] = useState({});
@@ -24,6 +25,9 @@ export default function App(){
                 </Route>
                 <Route path="/hoje" exact>
                     <TodayScreen/>
+                </Route>
+                <Route path="/habitos" exact>
+                    <HabitScreen/>
                 </Route>
             </Switch>
         </BrowserRouter>
