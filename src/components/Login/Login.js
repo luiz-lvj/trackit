@@ -5,11 +5,13 @@ import { useContext, useState } from 'react';
 import axios from 'axios';
 import Loader from 'react-loader-spinner';
 import UserContext from '../contexts/UserContext';
+import LoginLocalContext from '../contexts/LoginLocalContext';
 
 export default function Login(){
     const history = useHistory();
 
     const {loggedUser, setLoggedUser} = useContext(UserContext);
+    const { loginLocalName } = useContext(LoginLocalContext);
 
     const [emailUser, setEmailUser] = useState("");
     const [passwordUser, setPasswordUser] = useState("");
@@ -33,6 +35,7 @@ export default function Login(){
             setLoggedUser(request.data);
             setEmailUser("");
             setPasswordUser("");
+            saveLogin(request.data);
         });
         loginRequest.catch(()=>{
             setLoading(false);
@@ -42,6 +45,22 @@ export default function Login(){
         });
     }
 
+    function saveLogin(userData){
+        
+        const strData = JSON.stringify(userData);
+        localStorage.setItem(loginLocalName, strData);
+    }
+
+    function getSavedLogin(){
+        const loginStr = localStorage.getItem(loginLocalName);
+        if(!loginStr){
+            return;
+        }
+        const loginObj = JSON.parse(loginStr);
+        setLoggedUser(loginObj);
+        history.push("/hoje");
+    }
+    getSavedLogin();
 
     return(
         <LoginScreen>
@@ -59,7 +78,7 @@ export default function Login(){
                     <Loader type="ThreeDots" color="#FFFFFF" height={13} width={80} />
                     :"Entrar"}</button>
                 </form>
-                <Link to="/cadastro">Não tem uma conta? Cadastre-se!</Link>
+                <Link to="/cadastro" onClick={e => loading ? e.preventDefault() : ""}>Não tem uma conta? Cadastre-se!</Link>
             </FormUser>
         </LoginScreen>
     );

@@ -32,15 +32,20 @@ export default function TodayScreen(){
     const month = date.getMonth() +1;
 
     function getConcludedPercentage(){
+        const concluded = getTotalConcluded();
+        const percentage = Math.round(100*concluded/habits.length)/100;
+        setPercentageConcluded(percentage);
+        return percentage;
+    }
+
+    function getTotalConcluded(){
         let concluded = 0;
         habits.forEach((habit)=>{
             if(habit.done){
                 concluded += 1;
             }
         });
-        const percentage = Math.round(100*concluded/habits.length)/100;
-        setPercentageConcluded(percentage);
-        return percentage;
+        return concluded;
     }
 
     return(

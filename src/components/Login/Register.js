@@ -67,7 +67,7 @@ export default function Register(){
                     <Loader type="ThreeDots" color="#FFFFFF" height={13} width={80} />
                     : "Cadastrar"}</button>
                 </form>
-                <Link to="/">Já tem uma conta? Faça login!</Link>
+                <Link to="/" onClick={e => loading ? e.preventDefault() : ""}>Já tem uma conta? Faça login!</Link>
             </FormUser>
         </LoginScreen>
     );
