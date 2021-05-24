@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 import { useContext} from 'react';
 import UserContext from '../contexts/UserContext';
+import { useHistory } from 'react-router';
 
 export default function Header(){
-
+    const history = useHistory()
     const {loggedUser, setLoggedUser} = useContext(UserContext);
     return(
         <HeaderStyle>
             <h1>TrackIt</h1>
-            <img src={loggedUser.image} alt=""></img>
+            <img src={loggedUser.image} alt="" onClick={()=>history.push("/perfil")}></img>
         </HeaderStyle>
     );
 }
