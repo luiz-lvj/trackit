@@ -8,7 +8,7 @@ import { IoTrashOutline } from "react-icons/io5";
 export default function UserHabits(){
 
     const [habits, setHabits] = useState([]);
-    const { loggedUser, setLoggeduSer } = useContext(UserContext);
+    const { loggedUser } = useContext(UserContext);
 
     function loadHabits(){
         const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
@@ -25,7 +25,7 @@ export default function UserHabits(){
 
     useEffect(()=>{
         loadHabits();
-    }, [])
+    })
 
     if(habits.length === 0){
         return(

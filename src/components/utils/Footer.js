@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import PercentageContext from '../contexts/PercentageContext';
 
 export default function Footer(){
-    const { percentageConcluded, setPercentageConcluded } = useContext(PercentageContext);
+    const { percentageConcluded } = useContext(PercentageContext);
     return(
         <FooterStyle>
             <Link to="/habitos">Hábitos</Link>

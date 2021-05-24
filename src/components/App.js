@@ -9,6 +9,7 @@ import HabitScreen from './Habits/HabitScreen';
 import PercentageContext from './contexts/PercentageContext';
 import LoginLocalContext from './contexts/LoginLocalContext';
 import UserPage from './User/UserPage';
+import Historic from './Historic/Historic';
 
 export default function App(){
     const [loggedUser, setLoggedUser] = useState({});
@@ -34,6 +35,9 @@ export default function App(){
                             </Route>
                             <Route path="/habitos" exact>
                                 <HabitScreen/>
+                            </Route>
+                            <Route path="/historico" exact>
+                                <Historic/>
                             </Route>
                             <Route path="/perfil" exact>
                                 <UserPage/>

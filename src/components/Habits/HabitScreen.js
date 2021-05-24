@@ -11,7 +11,7 @@ import UserHabits from './UserHabits';
 
 export default function HabitScreen(){
     const history = useHistory();
-    const { loggedUser, setLoggedUser } = useContext(UserContext);
+    const { loggedUser } = useContext(UserContext);
     const [inCreation, setInCreation] = useState(false);
 
     if(!loggedUser.id){

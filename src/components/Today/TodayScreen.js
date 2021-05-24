@@ -10,9 +10,9 @@ import styled from 'styled-components';
 
 export default function TodayScreen(){
     const history = useHistory();
-    const {loggedUser, setLoggedUser} = useContext(UserContext);
+    const {loggedUser} = useContext(UserContext);
     const [habits, setHabits] = useState([]);
-    const { percentageConcluded, setPercentageConcluded } = useContext(PercentageContext);
+    const { setPercentageConcluded } = useContext(PercentageContext);
     const unDoneColorDark = "#BABABA";
     const doneColor = "#8FC549";
 

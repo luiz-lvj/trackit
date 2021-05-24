@@ -5,7 +5,7 @@ import { useHistory } from 'react-router';
 
 export default function Header(){
     const history = useHistory()
-    const {loggedUser, setLoggedUser} = useContext(UserContext);
+    const {loggedUser} = useContext(UserContext);
     return(
         <HeaderStyle>
             <h1>TrackIt</h1>

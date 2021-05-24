@@ -5,7 +5,7 @@ import { IoCheckmarkSharp } from "react-icons/io5";
 import axios from 'axios';
 
 export default function TodayHabits(props){
-    const {loggedUser, setLoggedUser} = useContext(UserContext);
+    const {loggedUser} = useContext(UserContext);
     
     const [habitsAvailable, setHabitsAvailable] = useState(false);
     const [disableSelection, setDisableSelection] = useState(false);

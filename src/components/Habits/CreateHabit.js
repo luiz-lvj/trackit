@@ -8,7 +8,7 @@ import {Day, Days, weekDays, selectedColors, unSelectedColors} from './DaysStyle
 export default function CreateHabit(props){
     const [habitName, setHabitName] = useState("");
     const [selectedDays, setSelectedDays] = useState([]);
-    const { loggedUser, setLoggedUser } = useContext(UserContext);
+    const { loggedUser } = useContext(UserContext);
     const [loading, setLoading] = useState(false);
 
     function toggleSelection(id){

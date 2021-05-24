@@ -3,11 +3,18 @@ import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import LoginLocalContext from '../contexts/LoginLocalContext';
 import UserContext from '../contexts/UserContext';
+import Header from '../utils/Header';
+import Footer from '../utils/Footer';
+import PageStyle from '../utils/PageStyle';
 
 export default function UserPage(){
     const {loggedUser, setLoggedUser } = useContext(UserContext);
     const history = useHistory();
     const { loginLocalName } = useContext(LoginLocalContext);
+    if(!loggedUser.id){
+        history.push("/hoje");
+        return "";
+    }
 
     function logoutUser(){
         setLoggedUser({});
@@ -16,28 +23,31 @@ export default function UserPage(){
     }
 
     return(
-        <StyledUserPage>
-            <img src={loggedUser.image}></img>
-            <h2>{loggedUser.name}</h2>
-            <GoBack onClick={()=> history.push("/hoje")}>Voltar para Hoje</GoBack>
+        <PageStyle>
+            <h2>Seu Perfil</h2>
+            <Header/>
+            <ContainerInfo>
+                <ImgProfile src={loggedUser.image}></ImgProfile>
+                <h2>{loggedUser.name}</h2>
+            </ContainerInfo>
+            
+            
             <Logout onClick={()=> logoutUser()}>Sair do TrackIt</Logout>
-        </StyledUserPage>
+            <Footer/>
+        </PageStyle>
     )
 }
 
-const StyledUserPage = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    margin-top: 30px;
-    img{
-        width: 200px;
-        height: 200px;
-        border-radius: 100px;
-        margin-bottom: 50px;
-        margin-top: 50px;
-    }
+const ImgProfile = styled.img`
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+        
+`;
+const ContainerInfo = styled.div`
+    text-align: center;
     h2{
         font-size: 25px;
         font-weight: bold;
@@ -45,16 +55,6 @@ const StyledUserPage = styled.div`
     }
 `;
 
-const GoBack = styled.button`
-    border: none;
-    color: #FFFFFF;
-    font-weight: bold;
-    background: #8FC549;
-    height: 40px;
-    margin-top: 10px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-`;
 
 const Logout = styled.button`
     border: none;
