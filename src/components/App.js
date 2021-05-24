@@ -10,10 +10,10 @@ import PercentageContext from './contexts/PercentageContext';
 
 export default function App(){
     const [loggedUser, setLoggedUser] = useState({});
-    const [percentageConcluded, setPercentageConclude] = useState(0);
+    const [percentageConcluded, setPercentageConcluded] = useState(0);
     return(
         <UserContext.Provider value={{ loggedUser, setLoggedUser }}>
-            <PercentageContext.Provider value={{ percentageConcluded, setPercentageConclude }}>
+            <PercentageContext.Provider value={{ percentageConcluded, setPercentageConcluded }}>
                 <React.Fragment>
                     <GlobalStyle/>
                 </React.Fragment>

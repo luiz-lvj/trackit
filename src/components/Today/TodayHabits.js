@@ -4,18 +4,19 @@ import UserContext from '../contexts/UserContext';
 import { IoCheckmarkSharp } from "react-icons/io5";
 import axios from 'axios';
 
-export default function TodayHabits(){
+export default function TodayHabits(props){
     const {loggedUser, setLoggedUser} = useContext(UserContext);
-    const [habits, setHabits] = useState([]);
+    
     const [habitsAvailable, setHabitsAvailable] = useState(false);
     const [disableSelection, setDisableSelection] = useState(false);
+    const habits = props.habits;
+    const setHabits = props.setHabits
 
     const doneColor = "#8FC549";
     const unDoneColorLight = "#EBEBEB";
-    const unDoneColorDark = "#BABABA";
     const normalTextColor = "#666666";
 
-    useEffect(()=>{
+    function getHabits(){
         const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today";
         const config = {
             headers: {
@@ -26,13 +27,16 @@ export default function TodayHabits(){
         setHabitsAvailable(false)
         requestPromise.then((request)=>{
             setHabits(request.data);
-            console.log(request);
             setHabitsAvailable(true);
         })
         requestPromise.catch(()=>{
             alert("Não conseguimos acessar seus hábitos de hoje.")
             setHabitsAvailable(true);
         })
+    }
+
+    useEffect(()=>{
+        getHabits();
     },[]);
 
     function checkHabit(id){
@@ -49,18 +53,13 @@ export default function TodayHabits(){
         const body = {}
         const requestPromise = axios.post(url,body, config);
         requestPromise.then(()=>{
-            const tmpHabits = [...habits]
-            tmpHabits.forEach((habit)=>{
-                if(habit.id === id){
-                    habit.done = true;
-                }
-            });
-            setHabits(tmpHabits);
+            getHabits();
             setDisableSelection(false);
         });
         requestPromise.catch(()=>{
             alert('Não foi possível marcar seu hábito como feito');
             setDisableSelection(false);
+            getHabits();
         });
     }
 
@@ -78,19 +77,13 @@ export default function TodayHabits(){
         const body = {}
         const requestPromise = axios.post(url,body, config);
         requestPromise.then(()=>{
-            const tmpHabits = [...habits]
-            tmpHabits.forEach((habit)=>{
-                if(habit.id === id){
-                    habit.done = false;
-                }
-            });
-            setHabits(tmpHabits);
+            getHabits();
             setDisableSelection(false);
         });
         requestPromise.catch((request)=>{
             alert('Não foi possível desmarcar seu hábito como feito');
             setDisableSelection(false);
-            console.log(request)
+            getHabits();
         });
     }
 
@@ -106,15 +99,6 @@ export default function TodayHabits(){
         );
     }
     
-    function getConcludedHabits(){
-        let concluded = 0;
-        habits.forEach((habit)=>{
-            if(habit.done){
-                concluded += 1;
-            }
-        });
-        return Math.round(concluded/habits.length());
-    }
     return(
         <HabitsStyles>
             {habits.map((habit)=>{
