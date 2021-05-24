@@ -105,7 +105,7 @@ export default function TodayHabits(){
             </HabitsStyles>
         );
     }
-    /* Voltar AQUIIIIIIII */
+    
     function getConcludedHabits(){
         let concluded = 0;
         habits.forEach((habit)=>{
@@ -140,18 +140,6 @@ export default function TodayHabits(){
                     </li>
                 );
             })}
-            {/*<li>
-                <HabitInfo>
-                    <h3>Ler capítulo do livro aaaaaaaaaaaaaaa aaaaaa aaaaaaaaaaaaaaaaaaaaa</h3>
-                    <p>Sequência atual: <SequenceStyle color={doneColor}>4 dias</SequenceStyle></p>
-                    <p>Seu recorde: <SequenceStyle color={
-                        habit
-                    }>5 dias</SequenceStyle></p>
-                </HabitInfo>
-                <BoxSelection color={false ? doneColor: unDoneColorLight}>
-                    <IoCheckmarkSharp color={'#FFFFFF'} size={'36px'}/>
-                </BoxSelection>
-                </li>*/}
         </HabitsStyles>
     );
 }
